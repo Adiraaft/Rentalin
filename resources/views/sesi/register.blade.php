@@ -70,25 +70,26 @@
                 Continue With Google
             </a>
             <hr class="mt-8 border border-[#F5F5F5]">
-            <form class="max-w-sm mx-auto mt-10 font-['DM_Sans']">
+            <form action="/sesi/create" method="POST" class="max-w-sm mx-auto mt-10 font-['DM_Sans']">
+                @csrf
                 <div class="mb-5">
                     <label for="name" class="block mb-2 text-sm font-medium ">
                         Name</label>
-                    <input type="text" id="text"
+                    <input type="text" id="name" name="name" value="{{ Session::get('name') }}"
                         class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
-                        placeholder="Enter Your Name" required />
+                        placeholder="Enter Your name" required />
                 </div>
                 <div class="mb-5">
                     <label for="email" class="block mb-2 text-sm font-medium ">
                         Email</label>
-                    <input type="email" id="email"
+                    <input type="email" id="email" name="email" value="{{ Session::get('email') }}"
                         class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                         placeholder="Enter Your Email" required />
                 </div>
                 <div class="mb-5">
                     <label for="password" class="block mb-2 text-sm font-medium">
                         Password</label>
-                    <input type="password" id="password"
+                    <input type="password" id="password" name="password"
                         class="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
                         placeholder="Enter Your Password" required />
                 </div>
@@ -101,10 +102,11 @@
                     <label for="remember" class="ms-2 text-sm font-medium">I agree to the Terms and
                         Privacy Policy</label>
                 </div>
-                <button type="submit"
-                    class="text-white bg-[#141414] font-medium rounded-lg text-sm w-full sm:w-auto px-45 py-4 text-center">Submit</button>
+                <button type="submit" name="submit"
+                    class="text-white cursor-pointer bg-[#141414] font-medium rounded-lg text-sm w-full sm:w-auto px-45 py-4 text-center">Submit</button>
             </form>
-            <p class="text-sm text-center mt-5">Already have an account? <a href="#" class="underline">Login Here</a></p>
+            <p class="text-sm text-center mt-5">Already have an account? <a href="/sesi" class="underline">Login
+                    Here</a></p>
         </div>
     </div>
 </body>
