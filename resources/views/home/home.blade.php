@@ -4,9 +4,10 @@
         <div class="text-center text-white">
             <h1 class="text-5xl font-bold mb-4 font-['Montserrat']">READY TO SHOOT. READY TO SHINE.</h1>
             <p class="font-['Poppins'] mt-2 text-xl">Rentalin hadir untuk mendukung setiap karya dan acara Anda.</p>
-            <a href="#"
-                class="mt-9 inline-block border-1 text-base py-3.5 px-11 border-white rounded-xl font-['DM_Sans']">Explore
-                Gear</a>
+            <a href="product"
+                class="mt-9 inline-block border border-white text-white text-base py-3.5 px-11 rounded-xl font-['DM_Sans'] hover:bg-white hover:text-black hover:shadow-lg transition-all duration-300 ease-in-out">
+                Explore Gear
+            </a>
         </div>
     </section>
 
@@ -79,19 +80,23 @@
         <h1 class="text-center text-4xl font-['Montserrat'] font-medium">Featured Equipment</h1>
         <div class="grid grid-cols-12 grid-rows-2 mt-10 gap-5">
             <!-- Card 1 -->
-            <div class="col-span-3 bg-white shadow-md flex flex-col justify-between">
-                <img src="{{ asset('image/fujifilm_xm5.png') }}" class="w-full h-[150px] object-contain overflow-hidden" alt="kamera">
+            <div
+                class="col-span-3 bg-white shadow-md flex flex-col justify-between hover:shadow-xl transition-shadow duration-300">
+                <img src="{{ asset('image/fujifilm_xm5.png') }}" class="w-full h-[150px] object-contain overflow-hidden"
+                    alt="kamera">
                 <div class="mt-10 mx-6">
                     <p class="font-['Poppins'] font-medium text-xl">fujifilm XM5</p>
                     <p class="font-['Poppins'] font-medium mt-3">Rp250.000 / hari</p>
                     <a href="#"
-                        class="font-['DM_Sans'] text-sm py-2 px-20 bg-[#141414] text-white rounded-sm mt-5 mb-8 inline-block">Rent
+                        class="font-['DM_Sans'] text-sm py-2 px-20 bg-[#141414] text-white rounded-sm mt-5 mb-8 inline-block hover:bg-black transition-colors duration-300">Rent
                         Now</a>
                 </div>
             </div>
             <!-- Card 2 -->
-            <div class="col-span-3 bg-white shadow-md flex flex-col justify-between">
-                <img src="{{ asset('image/rode-wireless.png') }}" class="w-full h-[150px] object-contain overflow-hidden" alt="kamera">
+            <div
+                class="col-span-3 bg-white shadow-md flex flex-col justify-between hover:shadow-xl transition-shadow duration-300">
+                <img src="{{ asset('image/rode-wireless.png') }}"
+                    class="w-full h-[150px] object-contain overflow-hidden" alt="kamera">
                 <div class="mt-10 mx-6">
                     <p class="font-['Poppins'] font-medium text-xl">Rode Wireless GO II Microphone</p>
                     <p class="font-['Poppins'] font-medium mt-3">Rp120.000 / hari</p>
@@ -101,8 +106,10 @@
                 </div>
             </div>
             <!-- Card 3 -->
-            <div class="col-span-3 bg-white shadow-md flex flex-col justify-between">
-                <img src="{{ asset('image/canon_eos.png') }}" class="w-full h-[150px] object-contain overflow-hidden" alt="kamera">
+            <div
+                class="col-span-3 bg-white shadow-md flex flex-col justify-between hover:shadow-xl transition-shadow duration-300">
+                <img src="{{ asset('image/canon_eos.png') }}" class="w-full h-[150px] object-contain overflow-hidden"
+                    alt="kamera">
                 <div class="mt-10 mx-6">
                     <p class="font-['Poppins'] font-medium text-xl">Canon EOS R50 Kit</p>
                     <p class="font-['Poppins'] font-medium mt-3">Rp220.000 / hari</p>
@@ -112,8 +119,10 @@
                 </div>
             </div>
             <!-- Card 4 -->
-            <div class="col-span-3 bg-white shadow-md flex flex-col justify-between">
-                <img src="{{ asset('image/godox_sl60w.png') }}" class="w-full h-[150px] object-contain overflow-hidden" alt="kamera">
+            <div
+                class="col-span-3 bg-white shadow-md flex flex-col justify-between hover:shadow-xl transition-shadow duration-300">
+                <img src="{{ asset('image/godox_sl60w.png') }}" class="w-full h-[150px] object-contain overflow-hidden"
+                    alt="kamera">
                 <div class="mt-10 mx-6">
                     <p class="font-['Poppins'] font-medium text-xl">Godox SL60W LED Video Light</p>
                     <p class="font-['Poppins'] font-medium mt-3">Rp300.000 / hari</p>
@@ -123,8 +132,10 @@
                 </div>
             </div>
             <!-- Card 5 -->
-            <div class="col-span-3 bg-white shadow-md flex flex-col justify-between">
-                <img src="{{ asset('image/zoom_h5.png') }}" class="w-full h-[150px] object-contain overflow-hidden" alt="kamera">
+            <div
+                class="col-span-3 bg-white shadow-md flex flex-col justify-between hover:shadow-xl transition-shadow duration-300">
+                <img src="{{ asset('image/zoom_h5.png') }}" class="w-full h-[150px] object-contain overflow-hidden"
+                    alt="kamera">
                 <div class="mt-10 mx-6">
                     <p class="font-['Poppins'] font-medium text-xl">Zoom H5 Audio Recorder</p>
                     <p class="font-['Poppins'] font-medium mt-3">Rp150.000 / hari</p>
@@ -134,8 +145,10 @@
                 </div>
             </div>
             <!-- Card 6 -->
-            <div class="col-span-3 bg-white shadow-md flex flex-col justify-between">
-                <img src="{{ asset('image/manfrotto_290.png') }}" class="w-full h-[150px] object-contain overflow-hidden" alt="kamera">
+            <div
+                class="col-span-3 bg-white shadow-md flex flex-col justify-between hover:shadow-xl transition-shadow duration-300">
+                <img src="{{ asset('image/manfrotto_290.png') }}"
+                    class="w-full h-[150px] object-contain overflow-hidden" alt="kamera">
                 <div class="mt-10 mx-6">
                     <p class="font-['Poppins'] font-medium text-xl">Tripod Manfrotto 290 Light</p>
                     <p class="font-['Poppins'] font-medium mt-3">Rp70.000 / hari </p>
@@ -145,8 +158,10 @@
                 </div>
             </div>
             <!-- Card 7 -->
-            <div class="col-span-3 bg-white shadow-md flex flex-col justify-between">
-                <img src="{{ asset('image/sony_zve10.png') }}" class="w-full h-[150px] object-contain overflow-hidden" alt="kamera">
+            <div
+                class="col-span-3 bg-white shadow-md flex flex-col justify-between hover:shadow-xl transition-shadow duration-300">
+                <img src="{{ asset('image/sony_zve10.png') }}" class="w-full h-[150px] object-contain overflow-hidden"
+                    alt="kamera">
                 <div class="mt-10 mx-6">
                     <p class="font-['Poppins'] font-medium text-xl">Sony ZV-E10 Vlogging Kit</p>
                     <p class="font-['Poppins'] font-medium mt-3">Rp300.000 / hari</p>
@@ -156,8 +171,10 @@
                 </div>
             </div>
             <!-- Card 8 -->
-            <div class="col-span-3 bg-white shadow-md flex flex-col justify-between">
-                <img src="{{ asset('image/ronin.png') }}" class="w-full h-[150px] object-contain overflow-hidden" alt="kamera">
+            <div
+                class="col-span-3 bg-white shadow-md flex flex-col justify-between hover:shadow-xl transition-shadow duration-300">
+                <img src="{{ asset('image/ronin.png') }}" class="w-full h-[150px] object-contain overflow-hidden"
+                    alt="kamera">
                 <div class="mt-10 mx-6">
                     <p class="font-['Poppins'] font-medium text-xl">Stabilizer Gimbal DJI Ronin SC</p>
                     <p class="font-['Poppins'] font-medium mt-3"> Rp150.000 / hari</p>
@@ -168,9 +185,9 @@
             </div>
         </div>
         <div class="flex justify-center">
-            <a href="#"
-                class="font-['DM_Sans'] inline-block mt-10 py-3 px-13 bg-[#141414] text-white rounded-sm mx-auto">Explore
-                All Product</a>
+            <a href="product"
+                class="font-['DM_Sans'] inline-block mt-10 py-3 px-13 bg-[#141414] text-white rounded-sm mx-auto  hover:bg-black hover:shadow-lg hover:scale-105 transition-all duration-300 ease-in-out">
+                Explore All Product</a>
         </div>
     </section>
 

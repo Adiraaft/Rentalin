@@ -15,6 +15,12 @@ Route::post('/sesi/create',[SessionController::class, 'create']);
 
 Route::get('/product', function () {
     return view('product.product');
+});    
+Route::get('/detail_product', function () {
+    return view('product.detailproduct');
+});
+Route::get('/cart', function () {
+    return view('cart.cart');
 });
 Route::get('/login_failed', function () {
     return view('sesi.login_failed');

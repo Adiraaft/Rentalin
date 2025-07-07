@@ -41,7 +41,7 @@
             <div class="mt-10 mx-6">
                 <p class="font-['Poppins'] font-medium text-xl">fujifilm XM5</p>
                 <p class="font-['Poppins'] font-medium mt-3">Rp250.000 / hari</p>
-                <a href="#"
+                <a href="detail_product"
                     class="font-['DM_Sans'] text-sm py-2 px-20 bg-[#141414] text-white rounded-sm mt-5 mb-8 inline-block">Rent
                     Now</a>
             </div>
