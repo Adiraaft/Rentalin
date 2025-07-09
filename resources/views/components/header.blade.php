@@ -34,7 +34,7 @@
         </div>
 
         <div class="flex gap-6">
-            <a href="#"
+            <a href="/cart"
                 class="bg-[#141414] px-3.5 py-2.5 rounded-xl shadow hover:bg-[#1f1f1f] hover:scale-105 hover:ring-2 hover:ring-[#ffffff33] transition-all duration-200 ease-in-out">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 576 512">
                     <path fill="#ffffff"

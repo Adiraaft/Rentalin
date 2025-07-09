@@ -30,20 +30,18 @@
             <!-- Service -->
             <div>
                 <p class="text-[#D3D8DE] pb-4 font-semibold">Service</p>
-                <p>Yachts</p>
-                <p>Yachts</p>
-                <p>Yachts</p>
+                <p>Produk</p>
+                <p>Booking</p>
+                <p>Bantuan</p>
             </div>
 
             <!-- Info -->
             <div class="flex flex-col justify-between h-full">
                 <div>
                     <p class="text-[#D3D8DE] pb-4 font-semibold">Info</p>
-                    <p>About us</p>
-                    <p>Project</p>
-                    <p>News</p>
-                    <p>Partners</p>
-                    <p>Contact</p>
+                    <p>Tentang Kami</p>
+                    <p>Syarat & Ketentuan</p>
+                    <p>Kebijakan Privasi</p>
                 </div>
 
                 <div class="pt-6">

@@ -1,31 +1,29 @@
 <x-layout>
     <section style="background-image: url('{{ asset('image/hero.jpg') }}');"
-        class="bg-cover bg-center min-h-[577px] flex items-center justify-center">
+        class="opacity-0 reveal bg-cover bg-center min-h-[577px] flex items-center justify-center">
         <div class="text-center text-white">
             <h1 class="text-5xl font-bold mb-4 font-['Montserrat']">READY TO SHOOT. READY TO SHINE.</h1>
             <p class="font-['Poppins'] mt-2 text-xl">Rentalin hadir untuk mendukung setiap karya dan acara Anda.</p>
-            <a href="product"
+            <a href="/product"
                 class="mt-9 inline-block border border-white text-white text-base py-3.5 px-11 rounded-xl font-['DM_Sans'] hover:bg-white hover:text-black hover:shadow-lg transition-all duration-300 ease-in-out">
                 Explore Gear
             </a>
         </div>
     </section>
 
-    <section class="my-18 mx-15">
+    <section class="my-18 mx-15 opacity-0 reveal">
         <h1 class="text-center text-4xl font-['Montserrat'] font-medium">About Us</h1>
         <div class="mt-10 mx-25 flex items-center">
             <img src="{{ asset('image/about.jpg') }}" class="w-139 h-88 text-base" alt="kamera">
-            <p class="font-['Poppins'] mx-8 tracking-widest">Rentalin adalah platform penyewaan peralatan multimedia
-                seperti kamera, drone, lighting, tripod, dan perlengkapan produksi lainnya. Kami hadir untuk mempermudah
-                proses sewa dengan sistem online yang cepat dan efisien.
-                Dengan sistem yang ramah pengguna dan tim yang berpengalaman, Rentalin mendukung kreator konten, event
-                organizer, hingga individu memenuhi kebutuhan produksi mereka — hanya dalam beberapa klik.
-                Rentalin, sewa mudah untuk hasil luar biasa.
+            <p class="font-['Poppins'] mx-8 tracking-widest">Rentalin adalah platform sewa peralatan multimedia seperti
+                kamera, drone, lighting, dan perlengkapan produksi lainnya. Kami mempermudah proses sewa secara online
+                dengan layanan cepat, ramah pengguna, dan didukung tim berpengalaman. Rentalin, solusi praktis untuk
+                hasil produksi maksimal.
             </p>
         </div>
     </section>
 
-    <section class="my-18">
+    <section class="my-18 opacity-0 reveal">
         <div class="h-98 w-auto bg-[#141414] ">
             <h1 class="text-center text-4xl font-['Montserrat'] text-white font-medium pt-11">Our Premium Services</h1>
             <p class="text-white text-center mt-6 font-['Poppins'] mx-15">Rentalin adalah platform penyewaan peralatan
@@ -76,7 +74,7 @@
         </div>
     </section>
 
-    <section class="mt-50 mx-15">
+    <section class="mt-50 mx-15 opacity-0 reveal">
         <h1 class="text-center text-4xl font-['Montserrat'] font-medium">Featured Equipment</h1>
         <div class="grid grid-cols-12 grid-rows-2 mt-10 gap-5">
             <!-- Card 1 -->
@@ -87,7 +85,7 @@
                 <div class="mt-10 mx-6">
                     <p class="font-['Poppins'] font-medium text-xl">fujifilm XM5</p>
                     <p class="font-['Poppins'] font-medium mt-3">Rp250.000 / hari</p>
-                    <a href="#"
+                    <a href="/detail_product"
                         class="font-['DM_Sans'] text-sm py-2 px-20 bg-[#141414] text-white rounded-sm mt-5 mb-8 inline-block hover:bg-black transition-colors duration-300">Rent
                         Now</a>
                 </div>
@@ -191,7 +189,7 @@
         </div>
     </section>
 
-    <section id="faq" class="py-10 mt-10">
+    <section id="faq" class="py-10 mt-10 opacity-0 reveal">
         <div class="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
             <div class="max-w-2xl mx-auto text-center">
                 <h2 class="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">
