@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
@@ -9,77 +9,111 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index() {
-        $products = Product::with('category')->latest()->get();
-        return view('admin.product.index', compact('products'));
+    public function index()
+    {
+        $products = Product::latest()->get();
+        return view('admin.products.index', compact('products'));
     }
 
-    public function create() {
+    public function create()
+    {
         $categories = Category::all();
-        return view('admin.product.create', compact('categories'));
+        return view('admin.products.create', compact('categories'));
     }
 
-    public function store(Request $request) {
-        $validated = $request->validate([
+    public function store(Request $request)
+    {
+        $request->validate([
             'title' => 'required',
             'description' => 'required',
             'specification' => 'nullable',
             'price' => 'required|numeric',
             'stock' => 'required|integer',
-            'category_id' => 'nullable|exists:categories,id',
+            'image_main' => 'required|image',
+            'image_detail1' => 'required|image',
+            'image_detail2' => 'required|image',
+            'image_detail3' => 'required|image',
+        ]);
+
+        $product = new Product();
+        $product->title = $request->title;
+        $product->description = $request->description;
+        $product->specification = $request->specification;
+        $product->price = $request->price;
+        $product->stock = $request->stock;
+
+        $product->image_main = $request->file('image_main')->store('products', 'public');
+        if ($request->hasFile('image_detail1')) {
+            $product->image_detail1 = $request->file('image_detail1')->store('products', 'public');
+        }
+        if ($request->hasFile('image_detail2')) {
+            $product->image_detail2 = $request->file('image_detail2')->store('products', 'public');
+        }
+        if ($request->hasFile('image_detail3')) {
+            $product->image_detail3 = $request->file('image_detail3')->store('products', 'public');
+        }
+
+        $product->save();
+
+        return redirect()->route('products.create')->with('success', 'Produk berhasil ditambahkan!');
+    }
+
+    public function edit($id)
+    {
+        $product = Product::findOrFail($id);
+        $categories = Category::all();
+        return view('admin.products.edit', compact('product', 'categories'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'specification' => 'nullable',
+            'price' => 'required|numeric',
+            'stock' => 'required|integer',
             'image_main' => 'nullable|image',
             'image_detail1' => 'nullable|image',
             'image_detail2' => 'nullable|image',
             'image_detail3' => 'nullable|image',
         ]);
 
-        foreach (['image_main', 'image_detail1', 'image_detail2', 'image_detail3'] as $img) {
-            if ($request->hasFile($img)) {
-                $file = $request->file($img)->store('products', 'public');
-                $validated[$img] = $file;
-            }
+        $product = Product::findOrFail($id);
+        $product->title = $request->title;
+        $product->description = $request->description;
+        $product->specification = $request->specification;
+        $product->price = $request->price;
+        $product->stock = $request->stock;
+
+        if ($request->hasFile('image_main')) {
+            $product->image_main = $request->file('image_main')->store('products', 'public');
+        }
+        if ($request->hasFile('image_detail1')) {
+            $product->image_detail1 = $request->file('image_detail1')->store('products', 'public');
+        }
+        if ($request->hasFile('image_detail2')) {
+            $product->image_detail2 = $request->file('image_detail2')->store('products', 'public');
+        }
+        if ($request->hasFile('image_detail3')) {
+            $product->image_detail3 = $request->file('image_detail3')->store('products', 'public');
         }
 
-        Product::create($validated);
+        $product->save();
 
-        return redirect()->route('product.index')->with('success', 'Product created!');
+        return redirect()->route('products.index')->with('success', 'Produk berhasil diperbarui!');
     }
 
-    public function edit($id) {
+    public function destroy($id)
+    {
         $product = Product::findOrFail($id);
-        $categories = Category::all();
-        return view('admin.product.edit', compact('product', 'categories'));
+        $product->delete();
+
+        return redirect()->route('products.index')->with('success', 'Produk berhasil dihapus!');
     }
 
-    public function update(Request $request, $id) {
-        $product = Product::findOrFail($id);
-        $validated = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
-            'specification' => 'nullable',
-            'price' => 'required|numeric',
-            'stock' => 'required|integer',
-            'category_id' => 'nullable|exists:categories,id',
-            'image_main' => 'nullable|image',
-            'image_detail1' => 'nullable|image',
-            'image_detail2' => 'nullable|image',
-            'image_detail3' => 'nullable|image',
-        ]);
-
-        foreach (['image_main', 'image_detail1', 'image_detail2', 'image_detail3'] as $img) {
-            if ($request->hasFile($img)) {
-                $file = $request->file($img)->store('products', 'public');
-                $validated[$img] = $file;
-            }
-        }
-
-        $product->update($validated);
-
-        return redirect()->route('product.index')->with('success', 'Product updated!');
-    }
-
-    public function destroy($id) {
-        Product::destroy($id);
-        return back()->with('success', 'Product deleted!');
+    public function show($id)
+    {
+        abort(404); // atau redirect
     }
 }

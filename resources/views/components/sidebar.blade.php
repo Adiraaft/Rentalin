@@ -3,7 +3,7 @@
     <nav>
         <ul class="space-y-4">
             <li>
-                <a href="#" class="flex items-center gap-3 hover:bg-[#3B3B3B] p-2 rounded text-white">
+                <a href="{{ route('admin.dashboard') }}" class="flex items-center gap-3 hover:bg-[#3B3B3B] p-2 rounded text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
                         class="lucide lucide-layout-dashboard-icon lucide-layout-dashboard">
@@ -41,12 +41,12 @@
                 <!-- Submenu -->
                 <ul x-show="open" @click.away="open = false" class="mt-2 ml-8 space-y-2">
                     <li>
-                        <a href="/admin/products/create" class="block hover:bg-[#3B3B3B] p-2 rounded text-white">
+                        <a href="{{ route('products.create') }}" class="block hover:bg-[#3B3B3B] p-2 rounded text-white">
                             Tambah Produk
                         </a>
                     </li>
                     <li>
-                        <a href="/admin/products" class="block hover:bg-[#3B3B3B] p-2 rounded text-white">
+                        <a href="{{ route('products.index') }}" class="block hover:bg-[#3B3B3B] p-2 rounded text-white">
                             Kelola Produk
                         </a>
                     </li>
