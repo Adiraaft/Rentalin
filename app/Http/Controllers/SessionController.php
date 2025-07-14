@@ -32,7 +32,21 @@ class SessionController extends Controller
         ];
 
         if (Auth::attempt($infologin)) {
-            return redirect()->intended('/');
+            $user = Auth::user();
+
+            // SIMPAN role ke session
+            Session::put('user', [
+                'id' => $user->id,
+                'name' => $user->name,
+                'role' => $user->role
+            ]);
+
+            // REDIRECT sesuai role
+            if ($user->role === 'admin') {
+                return redirect('/admin/dashboard');
+            } else {
+                return redirect('/');
+            }
         } else {
             return redirect('/login_failed');
         }
@@ -44,11 +58,13 @@ class SessionController extends Controller
         return redirect('/');
     }
 
-    function register(){
+    function register()
+    {
         return view('sesi.register');
     }
 
-    function create(Request $request){
+    function create(Request $request)
+    {
         Session::flash('name', $request->name);
         Session::flash('email', $request->email);
         $request->validate([
@@ -65,9 +81,9 @@ class SessionController extends Controller
         ]);
 
         $data = [
-            'name' =>$request->name,
-            'email' =>$request->email,
-            'password' =>Hash::make($request->password)
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => Hash::make($request->password)
         ];
         User::create($data);
 

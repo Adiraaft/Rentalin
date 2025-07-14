@@ -1,6 +1,6 @@
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-<header class="shadow h-20 font-['DM_Sans']">
+<header class="shadow h-20 font-['DM_Sans'] antialiased">
     <div class="mx-15 mt-6 flex items-center justify-between">
         <img src="{{ asset('image/logo.png') }}" alt="logo">
         <div>

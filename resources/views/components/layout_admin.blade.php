@@ -22,18 +22,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <script src="//unpkg.com/alpinejs" defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+
 </head>
 
-<body class="grid grid-cols-12">
+<body class="grid grid-cols-12 font-['Poppins']">
 
     <x-sidebar />
 
     <main class="min-h-screen col-span-10">
+        <x-header-admin/>
         <div>
             {{ $slot }}
         </div>
     </main>
-
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
 </body>
-
 </html>

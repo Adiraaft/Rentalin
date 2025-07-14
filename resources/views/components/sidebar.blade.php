@@ -15,19 +15,44 @@
                     Dashboard
                 </a>
             </li>
-            <li>
-                <a href="#" class="flex items-center gap-3 hover:bg-[#3B3B3B] p-2 rounded text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                        class="lucide lucide-box-icon lucide-box">
-                        <path
-                            d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
-                        <path d="m3.3 7 8.7 5 8.7-5" />
-                        <path d="M12 22V12" />
+            <li x-data="{ open: false }" class="relative">
+                <!-- Trigger link -->
+                <button @click="open = !open"
+                    class="flex items-center justify-between w-full gap-3 hover:bg-[#3B3B3B] p-2 rounded text-white">
+                    <div class="flex items-center gap-3">
+                        <!-- Icon -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+                            stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-box">
+                            <path
+                                d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+                            <path d="m3.3 7 8.7 5 8.7-5" />
+                            <path d="M12 22V12" />
+                        </svg>
+                        Product
+                    </div>
+                    <!-- Caret -->
+                    <svg class="w-4 h-4 transform" :class="{ 'rotate-180': open }" fill="none" stroke="white"
+                        viewBox="0 0 24 24">
+                        <path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
                     </svg>
-                    Product
-                </a>
+                </button>
+
+                <!-- Submenu -->
+                <ul x-show="open" @click.away="open = false" class="mt-2 ml-8 space-y-2">
+                    <li>
+                        <a href="/admin/products/create" class="block hover:bg-[#3B3B3B] p-2 rounded text-white">
+                            Tambah Produk
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/admin/products" class="block hover:bg-[#3B3B3B] p-2 rounded text-white">
+                            Kelola Produk
+                        </a>
+                    </li>
+                </ul>
             </li>
+
             <li>
                 <a href="#" class="flex items-center gap-3 hover:bg-[#3B3B3B] p-2 rounded text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -72,7 +97,8 @@
             <li>
                 <a href="#" class="flex items-center gap-3 hover:bg-[#3B3B3B] p-2 rounded text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                        fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        fill="none" stroke="white" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round"
                         class="lucide lucide-file-chart-column-increasing-icon lucide-file-chart-column-increasing">
                         <path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z" />
                         <path d="M14 2v4a2 2 0 0 0 2 2h4" />
