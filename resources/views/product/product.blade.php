@@ -37,7 +37,7 @@
         @foreach ($products as $product)
             <div class="col-span-3 bg-white shadow-md flex flex-col items-center justify-between">
                 <img src="{{ asset('storage/' . $product->image_thumbnail) }}" alt="{{ $product->title }}"
-                    class="w-[190px] h-[150px] object-cover" />
+                    class="w-full h-[150px] object-contain" />
                 <div class="mt-10 mx-6">
                     <p class="font-['Poppins'] font-medium text-xl">{{ $product->title }}</p>
                     <p class="font-['Poppins'] font-medium mt-3">

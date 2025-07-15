@@ -18,8 +18,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        $categories = Category::all();
-        return view('admin.products.create', compact('categories'));
+        return view('admin.products.create');
     }
 
     public function store(Request $request)
@@ -64,13 +63,6 @@ class ProductController extends Controller
             'type' => 'success',
             'message' => 'Produk berhasil ditambah!'
         ]);
-    }
-
-    public function edit($id)
-    {
-        $product = Product::findOrFail($id);
-        $categories = Category::all();
-        return view('admin.products.edit', compact('product', 'categories'));
     }
 
     public function update(Request $request, $id)
@@ -142,4 +134,4 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         return view('product.detailproduct', compact('product'));
     }
-}
+ }

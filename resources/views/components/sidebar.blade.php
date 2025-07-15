@@ -54,7 +54,7 @@
             </li>
 
             <li>
-                <a href="#" class="flex items-center gap-3 hover:bg-[#3B3B3B] p-2 rounded text-white">
+                <a href="{{ route('admin.bookings') }}" class="flex items-center gap-3 hover:bg-[#3B3B3B] p-2 rounded text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round" class="lucide lucide-clipboard-list-icon lucide-clipboard-list">

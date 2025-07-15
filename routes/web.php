@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BookingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\ProductController;
@@ -12,7 +13,15 @@ Route::get('/', function () {
 Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::resource('products', ProductController::class)->except(['show']);
+    Route::get('/bookings', [BookingController::class, 'index'])->name('admin.bookings');
 });
+
+Route::middleware(['auth'])->group(function () {
+    Route::post('/booking/{product}', [BookingController::class, 'store'])->name('bookings.store');
+    Route::get('/cart', [BookingController::class, 'cart'])->name('cart.index');
+    Route::post('/checkout', [BookingController::class, 'checkout'])->name('cart.checkout');
+});
+
 
 Route::get('/sesi', [SessionController::class, 'index']);
 Route::post('/sesi/login', [SessionController::class, 'login']);
@@ -24,18 +33,9 @@ Route::get('/product', [ProductController::class, 'showAll'])->name('products.li
 Route::get('/product/{id}', [ProductController::class, 'showDetail'])->name('product.detail');
 
 
-Route::get('/cart', function () {
-    return view('cart.cart');
-});
-
 Route::get('/login_failed', function () {
     return view('sesi.login_failed');
 });
 Route::get('/kelola_produk', function () {
     return view('admin/products/manage');
-});
-
-Route::get('/sweet', function () {
-   alert()->success('Berhasil', 'Ini SweetAlert!');
-   return view('sweet-test');
 });
