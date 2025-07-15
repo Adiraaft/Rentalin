@@ -8,25 +8,25 @@
         <!-- Cards ringkasan -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
             <!-- Card 1 -->
-            <div class="bg-white shadow rounded-lg p-4">
+            <div class="bg-white shadow-md rounded-lg p-4">
                 <h2 class="text-gray-600 text-sm">Total Produk</h2>
                 <p class="text-2xl font-bold">120</p>
             </div>
 
             <!-- Card 2 -->
-            <div class="bg-white shadow rounded-lg p-4">
+            <div class="bg-white shadow-md rounded-lg p-4">
                 <h2 class="text-gray-600 text-sm">Booking Aktif</h2>
                 <p class="text-2xl font-bold">8</p>
             </div>
 
             <!-- Card 3 -->
-            <div class="bg-white shadow rounded-lg p-4">
+            <div class="bg-white shadow-md rounded-lg p-4">
                 <h2 class="text-gray-600 text-sm">Total Pelanggan</h2>
                 <p class="text-2xl font-bold">345</p>
             </div>
 
             <!-- Card 4 -->
-            <div class="bg-white shadow rounded-lg p-4">
+            <div class="bg-white shadow-md rounded-lg p-4">
                 <h2 class="text-gray-600 text-sm">Laporan Bulan Ini</h2>
                 <p class="text-2xl font-bold">Rp 5,200,000</p>
             </div>
@@ -35,13 +35,13 @@
         <!-- Section 2: Grafik & Tabel -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <!-- Grafik tren (placeholder) -->
-            <div class="bg-white shadow rounded-lg p-4">
+            <div class="bg-white shadow-md rounded-lg p-4">
                 <h2 class="text-lg font-semibold mb-4">Grafik Booking</h2>
                 <div class="h-64 flex items-center justify-center text-gray-400">Chart Placeholder</div>
             </div>
 
             <!-- Tabel booking terbaru -->
-            <div class="bg-white shadow rounded-lg p-4">
+            <div class="bg-white shadow-md rounded-lg p-4">
                 <h2 class="text-lg font-semibold mb-4">Booking Terbaru</h2>
                 <div class="overflow-x-auto">
                     <table class="min-w-full text-left text-sm">

@@ -51,6 +51,7 @@
         </div>
     </main>
 
+
     <x-footer />
 
     <script>
@@ -71,6 +72,7 @@
         });
     </script>
 
+    @include('sweetalert::alert')
 </body>
 
 </html>

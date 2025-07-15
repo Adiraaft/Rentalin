@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
+
 class SessionController extends Controller
 {
     function index()
@@ -93,7 +94,7 @@ class SessionController extends Controller
         ];
 
         if (Auth::attempt($infologin)) {
-            return redirect()->intended('/');
+            return redirect('/')->with('success', 'Akun berhasil dibuat!');
         } else {
             return redirect('/login_failed');
         }

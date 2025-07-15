@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class ProductController extends Controller
 {
@@ -29,6 +30,7 @@ class ProductController extends Controller
             'specification' => 'nullable',
             'price' => 'required|numeric',
             'stock' => 'required|integer',
+            'image_thumbnail' => 'nullable|image',
             'image_main' => 'required|image',
             'image_detail1' => 'required|image',
             'image_detail2' => 'required|image',
@@ -42,6 +44,9 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->stock = $request->stock;
 
+        if ($request->hasFile('image_thumbnail')) {
+            $product->image_thumbnail = $request->file('image_thumbnail')->store('products', 'public');
+        }
         $product->image_main = $request->file('image_main')->store('products', 'public');
         if ($request->hasFile('image_detail1')) {
             $product->image_detail1 = $request->file('image_detail1')->store('products', 'public');
@@ -55,7 +60,10 @@ class ProductController extends Controller
 
         $product->save();
 
-        return redirect()->route('products.create')->with('success', 'Produk berhasil ditambahkan!');
+        return redirect()->route('products.create')->with('alert', [
+            'type' => 'success',
+            'message' => 'Produk berhasil ditambah!'
+        ]);
     }
 
     public function edit($id)
@@ -73,6 +81,7 @@ class ProductController extends Controller
             'specification' => 'nullable',
             'price' => 'required|numeric',
             'stock' => 'required|integer',
+            'image_thumbnail' => 'nullable|image',
             'image_main' => 'nullable|image',
             'image_detail1' => 'nullable|image',
             'image_detail2' => 'nullable|image',
@@ -86,6 +95,10 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->stock = $request->stock;
 
+
+        if ($request->hasFile('image_thumbnail')) {
+            $product->image_thumbnail = $request->file('image_thumbnail')->store('products', 'public');
+        }
         if ($request->hasFile('image_main')) {
             $product->image_main = $request->file('image_main')->store('products', 'public');
         }
@@ -100,8 +113,10 @@ class ProductController extends Controller
         }
 
         $product->save();
-
-        return redirect()->route('products.index')->with('success', 'Produk berhasil diperbarui!');
+        return redirect()->route('products.index')->with('alert', [
+            'type' => 'success',
+            'message' => 'Produk berhasil diperbarui!'
+        ]);
     }
 
     public function destroy($id)
@@ -115,5 +130,16 @@ class ProductController extends Controller
     public function show($id)
     {
         abort(404); // atau redirect
+    }
+
+    public function showAll()
+    {
+        $products = Product::latest()->get();
+        return view('product.product', compact('products'));
+    }
+    public function showDetail($id)
+    {
+        $product = Product::findOrFail($id);
+        return view('product.detailproduct', compact('product'));
     }
 }

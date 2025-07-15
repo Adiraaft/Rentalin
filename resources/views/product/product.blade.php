@@ -34,78 +34,23 @@
                 <button class="text-sm text-left">Stabilizer / Slider</button>
             </div>
         </div>
-        <!-- Card 1 -->
-        <div class="col-span-3 bg-white shadow-md flex flex-col justify-between">
-            <img src="{{ asset('image/fujifilm_xm5.png') }}" class="w-full h-[150px] object-contain overflow-hidden"
-                alt="kamera">
-            <div class="mt-10 mx-6">
-                <p class="font-['Poppins'] font-medium text-xl">fujifilm XM5</p>
-                <p class="font-['Poppins'] font-medium mt-3">Rp250.000 / hari</p>
-                <a href="detail_product"
-                    class="font-['DM_Sans'] text-sm py-2 px-20 bg-[#141414] text-white rounded-sm mt-5 mb-8 inline-block">Rent
-                    Now</a>
+        @foreach ($products as $product)
+            <div class="col-span-3 bg-white shadow-md flex flex-col items-center justify-between">
+                <img src="{{ asset('storage/' . $product->image_thumbnail) }}" alt="{{ $product->title }}"
+                    class="w-[190px] h-[150px] object-cover" />
+                <div class="mt-10 mx-6">
+                    <p class="font-['Poppins'] font-medium text-xl">{{ $product->title }}</p>
+                    <p class="font-['Poppins'] font-medium mt-3">
+                        Rp{{ number_format($product->price, 0, ',', '.') }} / hari
+                    </p>
+                    <a href="{{ route('product.detail', $product->id) }}"
+                        class="font-['DM_Sans'] text-sm py-2 px-20 bg-[#141414] text-white rounded-sm mt-5 mb-8 inline-block">
+                        Rent Now
+                    </a>
+                </div>
             </div>
-        </div>
-        <!-- Card 2 -->
-        <div class="col-span-3 bg-white shadow-md flex flex-col justify-between">
-            <img src="{{ asset('image/rode-wireless.png') }}" class="w-full h-[150px] object-contain overflow-hidden"
-                alt="kamera">
-            <div class="mt-10 mx-6">
-                <p class="font-['Poppins'] font-medium text-xl">Rode Wireless GO II Microphone</p>
-                <p class="font-['Poppins'] font-medium mt-3">Rp120.000 / hari</p>
-                <a href="#"
-                    class="font-['DM_Sans'] text-sm py-2 px-20 bg-[#141414] text-white rounded-sm mt-5 mb-8 inline-block">Rent
-                    Now</a>
-            </div>
-        </div>
-        <!-- Card 3 -->
-        <div class="col-span-3 bg-white shadow-md flex flex-col justify-between">
-            <img src="{{ asset('image/canon_eos.png') }}" class="w-full h-[150px] object-contain overflow-hidden"
-                alt="kamera">
-            <div class="mt-10 mx-6">
-                <p class="font-['Poppins'] font-medium text-xl">Canon EOS R50 Kit</p>
-                <p class="font-['Poppins'] font-medium mt-3">Rp220.000 / hari</p>
-                <a href="#"
-                    class="font-['DM_Sans'] text-sm py-2 px-20 bg-[#141414] text-white rounded-sm mt-5 mb-8 inline-block">Rent
-                    Now</a>
-            </div>
-        </div>
-        <!-- Card 4 -->
-        <div class="col-span-3 bg-white shadow-md flex flex-col justify-between">
-            <img src="{{ asset('image/godox_sl60w.png') }}" class="w-full h-[150px] object-contain overflow-hidden"
-                alt="kamera">
-            <div class="mt-10 mx-6">
-                <p class="font-['Poppins'] font-medium text-xl">Godox SL60W LED Video Light</p>
-                <p class="font-['Poppins'] font-medium mt-3">Rp300.000 / hari</p>
-                <a href="#"
-                    class="font-['DM_Sans'] text-sm py-2 px-20 bg-[#141414] text-white rounded-sm mt-5 mb-8 inline-block">Rent
-                    Now</a>
-            </div>
-        </div>
-        <!-- Card 5 -->
-        <div class="col-span-3 bg-white shadow-md flex flex-col justify-between">
-            <img src="{{ asset('image/zoom_h5.png') }}" class="w-full h-[150px] object-contain overflow-hidden"
-                alt="kamera">
-            <div class="mt-10 mx-6">
-                <p class="font-['Poppins'] font-medium text-xl">Zoom H5 Audio Recorder</p>
-                <p class="font-['Poppins'] font-medium mt-3">Rp150.000 / hari</p>
-                <a href="#"
-                    class="font-['DM_Sans'] text-sm py-2 px-20 bg-[#141414] text-white rounded-sm mt-5 mb-8 inline-block">Rent
-                    Now</a>
-            </div>
-        </div>
-        <!-- Card 6 -->
-        <div class="col-span-3 bg-white shadow-md flex flex-col justify-between">
-            <img src="{{ asset('image/manfrotto_290.png') }}" class="w-full h-[150px] object-contain overflow-hidden"
-                alt="kamera">
-            <div class="mt-10 mx-6">
-                <p class="font-['Poppins'] font-medium text-xl">Tripod Manfrotto 290 Light</p>
-                <p class="font-['Poppins'] font-medium mt-3">Rp70.000 / hari </p>
-                <a href="#"
-                    class="font-['DM_Sans'] text-sm py-2 px-20 bg-[#141414] text-white rounded-sm mt-5 mb-8 inline-block">Rent
-                    Now</a>
-            </div>
-        </div>
+        @endforeach
+
     </div>
 
 

@@ -15,6 +15,7 @@
                     <th class="px-4 py-2">Nama Produk</th>
                     <th class="px-4 py-2">Harga</th>
                     <th class="px-4 py-2">Stok</th>
+                    <th class="px-4 py-2">Tanggal</th>
                     <th class="px-4 py-2">Aksi</th>
                 </tr>
             </thead>
@@ -25,6 +26,7 @@
                         <td class="px-4 py-2">{{ $product->title }}</td>
                         <td class="px-4 py-2">Rp {{ number_format($product->price, 0, ',', '.') }}</td>
                         <td class="px-4 py-2">{{ $product->stock }}</td>
+                        <td class="px-4 py-2">{{ $product->created_at }}</td>
                         <td class="px-4 py-2">
                             <div class="flex items-center gap-2">
                                 <a href="{{ route('products.edit', $product->id) }}"
@@ -53,7 +55,6 @@
                                     </button>
                                 </form>
                             </div>
-
                         </td>
                     </tr>
                 @endforeach

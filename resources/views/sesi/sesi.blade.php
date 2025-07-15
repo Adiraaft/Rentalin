@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Rentalin</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -98,10 +99,12 @@
                 <button type="submit" name="submit"
                     class="text-white cursor-pointer bg-[#141414] font-medium rounded-lg text-sm w-full sm:w-auto px-45 py-4 text-center">Submit</button>
             </form>
-            <p class="text-sm text-center mt-5">Dont have an account? <a href="/sesi/register" class="underline">Register
+            <p class="text-sm text-center mt-5">Dont have an account? <a href="/sesi/register"
+                    class="underline">Register
                     Here</a></p>
         </div>
     </div>
+
 </body>
 
 </html>

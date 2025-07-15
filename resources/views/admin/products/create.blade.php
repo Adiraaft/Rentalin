@@ -2,7 +2,7 @@
     <div class="mx-15 my-10">
         <h1 class="text-2xl font-semibold mb-4">Tambah Produk</h1>
 
-        <form method="POST" action="{{ route('products.store')}}" enctype="multipart/form-data" class="space-y-6">
+        <form method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data" class="space-y-6">
             @csrf
 
             <div>
@@ -31,6 +31,11 @@
             </div>
 
             <div>
+                <label class="block font-medium">Thumbnail Produk</label>
+                <input type="file" name="image_thumbnail" required />
+            </div>
+
+            <div>
                 <label class="block font-medium">Foto Utama</label>
                 <input type="file" name="image_main" required />
             </div>
@@ -50,8 +55,29 @@
                 </div>
             </div>
 
-            <button type="submit" class="bg-[#141414] text-white px-6 py-2 rounded">Simpan Produk</button>
+            <button type="submit" id="saveButton" class="bg-[#141414] text-white px-6 py-2 rounded">Simpan
+                Produk</button>
         </form>
     </div>
 
+    <script>
+        document.getElementById('saveButton').addEventListener('click', function(e) {
+            e.preventDefault(); // Block form submission
+
+            Swal.fire({
+                title: 'Berhasil',
+                text: 'Produk berhasil diperbarui!',
+                icon: 'success',
+                showConfirmButton: true, // Wajib true untuk kontrol manual
+                confirmButtonText: 'OK',
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+                timer: 0 // Force non-auto-close
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.closest('form').submit(); // Lanjut submit form
+                }
+            });
+        });
+    </script>
 </x-layout_admin>

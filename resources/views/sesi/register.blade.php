@@ -70,6 +70,15 @@
                 Continue With Google
             </a>
             <hr class="mt-8 border border-[#F5F5F5]">
+            @if ($errors->any())
+                <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                    <ul class="list-disc pl-5">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <form action="/sesi/create" method="POST" class="max-w-sm mx-auto mt-10 font-['DM_Sans']">
                 @csrf
                 <div class="mb-5">
@@ -106,7 +115,9 @@
                     class="text-white cursor-pointer bg-[#141414] font-medium rounded-lg text-sm w-full sm:w-auto px-45 py-4 text-center">Submit</button>
             </form>
             <p class="text-sm text-center mt-5">Already have an account? <a href="/sesi" class="underline">Login
-                    Here</a></p>
+                    Here</a>
+            </p>
+
         </div>
     </div>
 </body>
