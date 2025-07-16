@@ -41,3 +41,10 @@ Route::get('/login_failed', function () {
 Route::get('/kelola_produk', function () {
     return view('admin/products/manage');
 });
+
+Route::get('/pelanggan', function () {
+    return view('admin/pelanggan');
+});
+Route::get('/admin', function () {
+    return view('admin/admin');
+});
