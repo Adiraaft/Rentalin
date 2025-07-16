@@ -96,7 +96,11 @@
         </div>
         <div class="mt-14 font-['Poppins']">
             <p class="text-2xl font-bold">SPESIFIKASI</p>
-            <p class="mt-4 whitespace-normal">{{ $product->specification }}</p>
+            <ul class="mt-4 list-disc list-inside">
+                @foreach (explode("\n", $product->specification) as $spec)
+                    <li>{{ $spec }}</li>
+                @endforeach
+            </ul>
         </div>
     </div>
 

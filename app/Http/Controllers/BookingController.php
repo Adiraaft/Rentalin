@@ -74,4 +74,46 @@ class BookingController extends Controller
 
         return redirect()->route('cart.index')->with('success', 'Checkout berhasil, booking sudah tercatat.');
     }
+    public function destroy($id)
+    {
+        $item = Cart::findOrFail($id);
+
+        // Opsional: pastikan hanya user yg punya yang bisa hapus
+        if ($item->users_id !== auth()->id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        $item->delete();
+
+        return redirect()->route('cart.index')->with('success', 'Item berhasil dihapus dari keranjang.');
+    }
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'start_date' => 'required|date',
+            'end_date'   => 'required|date|after_or_equal:start_date',
+            'name'       => 'required|string',
+            'phone'      => 'required|string|max:15',
+            'email'      => 'required|email',
+            'address'    => 'required|string',
+        ]);
+
+        $cart = Cart::findOrFail($id);
+
+        // Opsional: hanya user pemilik yg boleh edit
+        if ($cart->users_id !== auth()->id()) {
+            abort(403);
+        }
+
+        $cart->update([
+            'start_date' => $request->start_date,
+            'end_date'   => $request->end_date,
+            'name'       => $request->name,
+            'phone'      => $request->phone,
+            'email'      => $request->email,
+            'address'    => $request->address,
+        ]);
+
+        return redirect()->route('cart.index')->with('success', 'Item berhasil diupdate.');
+    }
 }

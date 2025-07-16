@@ -20,13 +20,15 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/booking/{product}', [BookingController::class, 'store'])->name('bookings.store');
     Route::get('/cart', [BookingController::class, 'cart'])->name('cart.index');
     Route::post('/checkout', [BookingController::class, 'checkout'])->name('cart.checkout');
+    Route::delete('/cart/{cart}', [BookingController::class, 'destroy'])->name('cart.destroy');
+    Route::put('/cart/{cart}', [BookingController::class, 'update'])->name('cart.update');
 });
 
 
 Route::get('/sesi', [SessionController::class, 'index']);
 Route::post('/sesi/login', [SessionController::class, 'login']);
 Route::post('/sesi/logout', [SessionController::class, 'logout'])->name('logout');
-Route::get('/sesi/register', [SessionController::class, 'register']);
+Route::get('/sesi/register', [SessionController::class, 'register'])->name('login');
 Route::post('/sesi/create', [SessionController::class, 'create']);
 
 Route::get('/product', [ProductController::class, 'showAll'])->name('products.list');

@@ -65,6 +65,12 @@ class ProductController extends Controller
         ]);
     }
 
+    public function edit($id)
+    {
+        $product = Product::findOrFail($id);
+        return view('admin.products.edit', compact('product'));
+    }
+
     public function update(Request $request, $id)
     {
         $request->validate([
@@ -134,4 +140,4 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         return view('product.detailproduct', compact('product'));
     }
- }
+}

@@ -25,16 +25,23 @@
                             <p class="text-xs leading-3 text-gray-600 py-2">{{ $item->phone }}</p>
                             <p class="w-96 text-xs leading-3 text-gray-600">{{ $item->address }}</p>
                             <p class="text-xs leading-3 text-gray-600 pt-2">
-                                Harga per hari: Rp {{ number_format($item->price_per_day, 0, ',', '.') }}
-                            </p>
-                            <p class="text-xs leading-3 text-gray-600 pt-2">
                                 Total hari:
                                 {{ \Carbon\Carbon::parse($item->start_date)->diffInDays(\Carbon\Carbon::parse($item->end_date)) + 1 }}
                             </p>
                             <div class="flex items-center justify-between pt-5">
                                 <div class="flex items-center">
-                                    <p class="text-xs leading-3 underline text-gray-800 cursor-pointer">Change</p>
-                                    <p class="text-xs leading-3 underline text-red-500 pl-5 cursor-pointer">Remove</p>
+                                    <button @click="open = true"
+                                        class="text-xs leading-3 underline text-gray-800 cursor-pointer">
+                                        Edit
+                                    </button>
+                                    <form action="{{ route('cart.destroy', $item->id) }}" method="POST"
+                                        onsubmit="return confirm('Yakin mau hapus item ini?')">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-xs leading-3 underline text-red-500 pl-5">
+                                            Remove
+                                        </button>
+                                    </form>
                                 </div>
                                 <p class="text-base font-black leading-none text-gray-800">
                                     Rp {{ number_format($item->total_price, 0, ',', '.') }}
@@ -46,7 +53,7 @@
                     <p class="text-gray-500 py-5">Keranjang kosong.</p>
                 @endforelse
 
-                <a href="{{ route('home') }}" class="flex font-semibold text-indigo-600 text-sm mt-10">
+                <a href="/product" class="flex font-semibold text-indigo-600 text-sm mt-10">
                     <svg class="fill-current mr-2 text-indigo-600 w-4" viewBox="0 0 448 512">
                         <path
                             d="M134.059 296H436c6.627 0 12-5.373 12-12v-56c0-6.627-5.373-12-12-12H134.059v-46.059c0-21.382-25.851-32.09-40.971-16.971L7.029 239.029c-9.373 9.373-9.373 24.569 0 33.941l86.059 86.059c15.119 15.119 40.971 4.411 40.971-16.971V296z" />

@@ -71,25 +71,4 @@
             </button>
         </form>
     </div>
-
-    <script>
-        document.getElementById('saveButton').addEventListener('click', function(e) {
-            e.preventDefault(); // Block form submission
-
-            Swal.fire({
-                title: 'Berhasil',
-                text: 'Produk berhasil diperbarui!',
-                icon: 'success',
-                showConfirmButton: true, // Wajib true untuk kontrol manual
-                confirmButtonText: 'OK',
-                allowOutsideClick: false,
-                allowEscapeKey: false,
-                timer: 0 // Force non-auto-close
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    this.closest('form').submit(); // Lanjut submit form
-                }
-            });
-        });
-    </script>
 </x-layout_admin>
