@@ -9,6 +9,10 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Midtrans\Config;
 use Midtrans\Snap;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\BookingExport;
+use Barryvdh\DomPDF\Facade\Pdf;
+use App\Models\Notification;
 
 class BookingController extends Controller
 {
@@ -127,8 +131,14 @@ class BookingController extends Controller
                 'total_price'  => $item->total_price,
                 'end_date'     => $item->end_date,
                 'status'       => 'pending',
+                'user_id'      => auth()->id()
             ]);
         }
+        \App\Models\Notification::create([
+            'user_id' => 1, // ID admin (atau pakai role-based assignment)
+            'title' => 'Booking Baru',
+            'message' => 'Booking baru dari ' . $item->name . ' untuk produk ' . $item->product->title,
+        ]);
 
         // Setelah selesai, kosongkan keranjang
         Cart::where('users_id', auth()->id())->delete();
@@ -231,5 +241,34 @@ class BookingController extends Controller
         });
 
         return response()->json($bookings);
+    }
+    public function exportExcel(Request $request)
+    {
+        return Excel::download(new BookingExport($request), 'laporan-booking.xlsx');
+    }
+    public function exportPDF(Request $request)
+    {
+        $query = Booking::with('product');
+
+        if ($request->start_date) {
+            $query->whereDate('start_date', '>=', $request->start_date);
+        }
+        if ($request->end_date) {
+            $query->whereDate('end_date', '<=', $request->end_date);
+        }
+        if ($request->status) {
+            $query->where('status', $request->status);
+        }
+
+        $bookings = $query->get();
+
+        // Hitung total_price manual
+        foreach ($bookings as $booking) {
+            $days = \Carbon\Carbon::parse($booking->start_date)->diffInDays($booking->end_date) + 1;
+            $booking->total_price = $days * ($booking->product->price ?? 0);
+        }
+
+        $pdf = Pdf::loadView('admin.laporan_pdf', compact('bookings'));
+        return $pdf->download('laporan-booking.pdf');
     }
 }

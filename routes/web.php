@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\NotificationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\ProductController;
@@ -12,13 +13,18 @@ Route::get('/', function () {
 
 Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/kelola-akun', [AdminController::class, 'kelolaAkun'])->name('admin.kelola-akun');
+    Route::post('/kelola-akun/tambah', [AdminController::class, 'tambahAkun'])->name('admin.kelola-akun.tambah');
+    Route::get('/chart-data', [AdminController::class, 'chartData'])->name('admin.chart.data');
     Route::resource('products', ProductController::class)->except(['show']);
     Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
     Route::get('/bookings', [BookingController::class, 'index'])->name('admin.bookings');
     Route::put('/bookings/{id}/status', [BookingController::class, 'updateStatus'])->name('bookings.updateStatus');
-    Route::get('/admin/chart-data', [AdminController::class, 'chartData'])->name('admin.chart.data');
     Route::get('/laporan', [BookingController::class, 'laporanView'])->name('laporan.index');
     Route::get('/laporan/ajax', [BookingController::class, 'laporanAjax'])->name('laporan.ajax');
+    Route::get('/laporan/export/excel', [BookingController::class, 'exportExcel'])->name('laporan.export.excel');
+    Route::get('/laporan/export/pdf', [BookingController::class, 'exportPDF'])->name('laporan.export.pdf');
+    Route::get('/notifikasi', [NotificationController::class, 'index'])->name('admin.notifikasi');
 });
 
 Route::middleware(['auth'])->group(function () {

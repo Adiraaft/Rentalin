@@ -13,26 +13,30 @@
                 <option value="dibatalkan">Dibatalkan</option>
             </select>
             <button id="filterBtn" class="bg-blue-600 text-white px-4 py-2 rounded cursor-pointer">Filter</button>
-            <button id="#" class="bg-blue-600 text-white px-4 py-2 rounded cursor-pointer">Export</button>
+            <a href="{{ route('laporan.export.excel', request()->query()) }}"
+                class="bg-green-600 text-white px-4 py-2 rounded">Export Excel</a>
+
+            <a href="{{ route('laporan.export.pdf', request()->query()) }}"
+                class="bg-red-600 text-white px-4 py-2 rounded">Export PDF</a>
         </div>
-
-        <table class="table-auto w-full bg-white" id="laporan-table">
-            <thead>
-                <tr>
-                    <th class="border p-2">Nama</th>
-                    <th class="border p-2">Produk</th>
-                    <th class="border p-2">Tanggal</th>
-                    <th class="border p-2">Status</th>
-                    <th class="border p-2">Total</th>
-                </tr>
-            </thead>
-            <tbody id="laporanBody">
-                <tr>
-                    <td colspan="5" class="text-center p-4 text-gray-500">Memuat data...</td>
-                </tr>
-            </tbody>
-        </table>
-
+        <div class="overflow-x-auto max-w-full rounded-lg shadow border">
+            <table class="table-auto w-full bg-white text-sm" id="laporan-table">
+                <thead class="bg-gray-100">
+                    <tr>
+                        <th class="py-3 px-7 text-left font-semibold text-gray-700 border-b">Nama</th>
+                        <th class="py-3 px-7 text-left font-semibold text-gray-700 border-b">Produk</th>
+                        <th class="py-3 px-7 text-left font-semibold text-gray-700 border-b">Tanggal</th>
+                        <th class="py-3 px-7 text-left font-semibold text-gray-700 border-b">Status</th>
+                        <th class="py-3 px-7 text-left font-semibold text-gray-700 border-b">Total</th>
+                    </tr>
+                </thead>
+                <tbody id="laporanBody">
+                    <tr>
+                        <td colspan="5" class="text-center p-4 text-gray-500">Memuat data...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <script>
@@ -55,18 +59,31 @@
                         return;
                     }
 
+                    let totalHarga = 0;
+
                     data.forEach(item => {
-                        console.log(item); // 🔍 Debug
+                        const total = Number(item.total_price) || 0;
+                        totalHarga += total;
+
                         const row =
                             `<tr>
                                 <td class="px-4 py-2 border">${item.name}</td>
                                 <td class="px-4 py-2 border">${item.product?.title || '-'}</td>
                                 <td class="px-4 py-2 border">${item.start_date} s/d ${item.end_date}</td>
-                                <td class="px-4 py-2 border">Rp ${Number(item.total_price).toLocaleString()}</td>
+                                <td class="px-4 py-2 border">Rp ${total.toLocaleString()}</td>
                                 <td class="px-4 py-2 border">${item.status}</td>
                             </tr>`;
                         tbody.innerHTML += row;
                     });
+
+                    // Tambahkan baris total keseluruhan
+                    const totalRow = `
+                        <tr class="bg-gray-100 font-bold">
+                            <td colspan="3" class="px-4 py-2 border text-right">Total Seluruh Transaksi:</td>
+                            <td class="px-4 py-2 border text-left" colspan="2">Rp ${totalHarga.toLocaleString()}</td>
+                        </tr>`;
+                    tbody.innerHTML += totalRow;
+
                 });
         }
 

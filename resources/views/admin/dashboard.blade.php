@@ -59,13 +59,10 @@
                                     <td class="px-4 py-2">
                                         {{ \Carbon\Carbon::parse($booking->created_at)->format('d-m-Y') }}</td>
                                     <td class="px-4 py-2">
-                                        <span
-                                            class="
-                                px-2 py-1 text-xs rounded
-                                {{ $booking->status == 'pending' ? 'bg-yellow-100 text-yellow-700' : '' }}
-                                {{ $booking->status == 'berlangsung' ? 'bg-blue-100 text-blue-700' : '' }}
-                                {{ $booking->status == 'selesai' ? 'bg-green-100 text-green-700' : '' }}
-                            ">
+                                        <span class="px-2 py-1 text-xs rounded
+                                            {{ $booking->status == 'pending' ? 'bg-yellow-100 text-yellow-700' : '' }}
+                                            {{ $booking->status == 'berlangsung' ? 'bg-blue-100 text-blue-700' : '' }}
+                                            {{ $booking->status == 'selesai' ? 'bg-green-100 text-green-700' : '' }}">
                                             {{ ucfirst($booking->status) }}
                                         </span>
                                     </td>
@@ -97,16 +94,16 @@
                 const ctx = document.getElementById('bookingChart').getContext('2d');
 
                 new Chart(ctx, {
-                    type: 'line', // ✅ ubah menjadi line
+                    type: 'line',
                     data: {
-                        labels: data.labels, // contoh: ["Jan 2025", "Feb 2025", ...]
+                        labels: data.labels,
                         datasets: [{
                             label: 'Jumlah Booking',
                             data: data.values,
                             fill: false,
                             borderColor: 'rgba(59, 130, 246, 1)',
                             backgroundColor: 'rgba(59, 130, 246, 0.5)',
-                            tension: 0.3, // garis halus
+                            tension: 0.3,
                             pointRadius: 5,
                             pointHoverRadius: 7
                         }]
