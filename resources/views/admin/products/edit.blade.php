@@ -2,8 +2,7 @@
     <div class="mx-15 my-10">
         <h1 class="text-2xl font-semibold mb-4">Edit Produk</h1>
 
-        <form method="POST" action="{{ route('products.update', $product->id) }}" enctype="multipart/form-data"
-            class="space-y-6">
+        <form id="editProductForm" enctype="multipart/form-data" class="space-y-6">
             @csrf
             @method('PUT')
 
@@ -66,9 +65,41 @@
                 @endfor
             </div>
 
-            <button type="submit" id="saveButton" class="bg-[#141414] text-white px-6 py-2 rounded">
+            <button type="button" id="saveButton" class="bg-[#141414] text-white px-6 py-2 rounded cursor-pointer">
                 Simpan Perubahan
             </button>
         </form>
     </div>
+
 </x-layout_admin>
+
+<script>
+    $('#saveButton').on('click', function() {
+        let form = $('#editProductForm')[0];
+        let formData = new FormData(form);
+
+        formData.append('_method', 'PUT');
+        formData.append('_token', '{{ csrf_token() }}');
+
+        $.ajax({
+            url: "{{ route('products.update', $product->id) }}",
+            method: 'POST',
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function(response) {
+                alert("Produk berhasil diperbarui!");
+                window.location.href = "{{ route('products.index') }}";
+            },
+            error: function(xhr) {
+                let res = xhr.responseJSON;
+                if (res && res.errors) {
+                    let errorMessages = Object.values(res.errors).map(e => e[0]).join("\n");
+                    alert("Terjadi kesalahan:\n" + errorMessages);
+                } else {
+                    alert("Terjadi kesalahan saat memperbarui produk.");
+                }
+            }
+        });
+    });
+</script>

@@ -1,5 +1,5 @@
 <x-layout_admin>
-    <div class="mx-15 my-10">
+    <div class="mx-6 my-10">
         <h1 class="text-2xl font-semibold mb-4">Tambah Produk</h1>
 
         <form id="productForm" method="POST" action="{{ route('products.store') }}" enctype="multipart/form-data" class="space-y-6">

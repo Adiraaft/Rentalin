@@ -122,6 +122,10 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $product->delete();
 
+        if (request()->ajax()) {
+            return response()->json(['message' => 'Produk berhasil dihapus!']);
+        }
+
         return redirect()->route('products.index')->with('success', 'Produk berhasil dihapus!');
     }
 

@@ -84,15 +84,63 @@
                         <span>Total cost</span>
                         <span>Rp {{ number_format($cartItems->sum('total_price'), 0, ',', '.') }}</span>
                     </div>
-                    <form action="{{ route('cart.checkout') }}" method="POST">
+                    <form id="payment-form">
                         @csrf
-                        <button type="submit"
-                            class="bg-[#141414] text-white rounded-sm mx-auto hover:bg-black hover:shadow-lg font-semibold py-3 text-sm uppercase w-full">
-                            Checkout
-                        </button>
+                        @if ($cartItems->count() > 0)
+                            <button id="pay-button" type="button"
+                                class="bg-[#141414] text-white rounded-sm mx-auto hover:bg-black hover:shadow-lg font-semibold py-3 text-sm uppercase w-full">
+                                Checkout
+                            </button>
+                        @else
+                            <button type="button" disabled
+                                class="bg-gray-400 text-white cursor-not-allowed rounded-sm mx-auto font-semibold py-3 text-sm uppercase w-full">
+                                Checkout
+                            </button>
+                        @endif
                     </form>
+
                 </div>
             </div>
         </div>
     </div>
+
+    <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ config('midtrans.client_key') }}">
+    </script>
+
+    @if ($snapToken)
+        <script>
+            document.getElementById('pay-button').addEventListener('click', function(e) {
+                e.preventDefault();
+
+                snap.pay('{{ $snapToken }}', {
+                    onSuccess: function(result) {
+                        fetch("{{ route('cart.paymentCallback') }}", {
+                                method: "POST",
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                                },
+                                body: JSON.stringify(result)
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                alert('Pembayaran berhasil! Booking telah disimpan.');
+                                window.location.href = '/cart/success';
+                            });
+                    },
+                    onPending: function(result) {
+                        alert('Menunggu pembayaran...');
+                    },
+                    onError: function(result) {
+                        alert('Pembayaran gagal.');
+                        console.error(result);
+                    },
+                    onClose: function() {
+                        alert('Kamu menutup popup pembayaran.');
+                    }
+                });
+            });
+        </script>
+    @endif
+
 </x-layout>

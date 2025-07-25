@@ -7,6 +7,8 @@ use App\Models\Booking;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
+use Midtrans\Config;
+use Midtrans\Snap;
 
 class BookingController extends Controller
 {
@@ -50,30 +52,91 @@ class BookingController extends Controller
     public function cart()
     {
         $cartItems = Cart::where('users_id', auth()->id())->with('product')->get();
-        return view('cart.cart', compact('cartItems'));
+
+        // Jika ada data Midtrans, siapkan token
+        if ($cartItems->isNotEmpty()) {
+            \Midtrans\Config::$serverKey = config('midtrans.server_key');
+            \Midtrans\Config::$clientKey = config('midtrans.client_key');
+            \Midtrans\Config::$isProduction = config('midtrans.is_production');
+
+            $total = $cartItems->sum('total_price');
+            $params = [
+                'transaction_details' => [
+                    'order_id' => 'ORDER-' . uniqid(),
+                    'gross_amount' => $total,
+                ],
+                'customer_details' => [
+                    'first_name' => auth()->user()->name,
+                    'email' => auth()->user()->email,
+                ]
+            ];
+
+            $snapToken = \Midtrans\Snap::getSnapToken($params);
+        } else {
+            $snapToken = null;
+        }
+
+        return view('cart.cart', compact('cartItems', 'snapToken'));
     }
 
+
     public function checkout()
+    {
+        \Midtrans\Config::$serverKey = config('midtrans.server_key');
+        \Midtrans\Config::$clientKey = config('midtrans.client_key');
+        \Midtrans\Config::$isProduction = config('midtrans.is_production');
+
+        $cartItems = Cart::where('users_id', auth()->id())->with('product')->get();
+        $total = $cartItems->sum('total_price');
+
+        // ✅ Cek jika cart kosong atau total 0
+        if ($cartItems->isEmpty() || $total < 1) {
+            return redirect()->route('cart.index')->with('error', 'Keranjang kosong atau total tidak valid.');
+        }
+
+        $orderId = 'ORDER-' . uniqid();
+
+        $params = [
+            'transaction_details' => [
+                'order_id' => $orderId,
+                'gross_amount' => $total,
+            ],
+            'customer_details' => [
+                'first_name' => auth()->user()->name,
+                'email' => auth()->user()->email,
+            ]
+        ];
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+        return view('cart.cart', compact('cartItems', 'snapToken'));
+    }
+
+    public function paymentCallback(Request $request)
     {
         $cartItems = Cart::where('users_id', auth()->id())->get();
 
         foreach ($cartItems as $item) {
             Booking::create([
-                'product_id'     => $item->product_id,
-                'name'           => $item->name,
-                'phone'          => $item->phone,
-                'email'          => $item->email,
-                'address'        => $item->address,
-                'start_date'     => $item->start_date,
-                'end_date'       => $item->end_date,
+                'product_id'   => $item->product_id,
+                'name'         => $item->name,
+                'phone'        => $item->phone,
+                'email'        => $item->email,
+                'address'      => $item->address,
+                'start_date'   => $item->start_date,
+                'total_price'  => $item->total_price,
+                'end_date'     => $item->end_date,
+                'status'       => 'pending',
             ]);
         }
 
-        // Kosongkan cart user
+        // Setelah selesai, kosongkan keranjang
         Cart::where('users_id', auth()->id())->delete();
 
-        return redirect()->route('cart.index')->with('success', 'Checkout berhasil, booking sudah tercatat.');
+        return response()->json(['message' => 'Booking berhasil disimpan']);
     }
+
+
     public function destroy($id)
     {
         $item = Cart::findOrFail($id);
@@ -115,5 +178,58 @@ class BookingController extends Controller
         ]);
 
         return redirect()->route('cart.index')->with('success', 'Item berhasil diupdate.');
+    }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:pending,diproses,berlangsung,selesai,dibatalkan'
+        ]);
+
+        $booking = Booking::findOrFail($id);
+        $booking->status = $request->status;
+        $booking->save();
+
+        return back()->with('success', 'Status booking diperbarui menjadi: ' . ucfirst($request->status));
+    }
+    public function laporanView()
+    {
+        return view('admin.laporan');
+    }
+
+    public function laporanAjax(Request $request)
+    {
+        $query = Booking::with('product');
+
+        if ($request->start_date) {
+            $query->whereDate('start_date', '>=', $request->start_date);
+        }
+
+        if ($request->end_date) {
+            $query->whereDate('end_date', '<=', $request->end_date);
+        }
+
+        if ($request->status) {
+            $query->where('status', $request->status);
+        }
+
+        $bookings = $query->get()->map(function ($booking) {
+            $start = \Carbon\Carbon::parse($booking->start_date);
+            $end = \Carbon\Carbon::parse($booking->end_date);
+            $days = $start->diffInDays($end) + 1;
+
+            return [
+                'name' => $booking->name,
+                'start_date' => $booking->start_date,
+                'end_date' => $booking->end_date,
+                'status' => $booking->status,
+                'product' => [
+                    'title' => $booking->product->title ?? '-',
+                ],
+                'total_price' => $days * ($booking->product->price ?? 0),
+            ];
+        });
+
+        return response()->json($bookings);
     }
 }
